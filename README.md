@@ -19,3 +19,7 @@
 - SVD (다크프로그래머 님 블로그)
 
   [https://darkpgmr.tistory.com/106]
+
+- From seq2seq to BERT
+
+  [https://lovit.github.io/machine%20learning/2019/03/17/attention_in_nlp/]
