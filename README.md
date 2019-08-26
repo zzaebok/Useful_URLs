@@ -26,3 +26,6 @@
 
 - Data imbalance problem
   [https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/]
+
+- Transformer Network
+  [https://wikidocs.net/31379]
