@@ -1,4 +1,4 @@
-# Helpful urls on machine learning
+# Helpful urls on machine learning / deep learning
 
 - Attention? Attention!
 
@@ -25,7 +25,13 @@
   [https://lovit.github.io/machine%20learning/2019/03/17/attention_in_nlp/]
 
 - Data imbalance problem
+
   [https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/]
 
 - Transformer Network
+
   [https://wikidocs.net/31379]
+
+- 한국 AI open data
+
+  [http://www.aihub.or.kr/content/610]
