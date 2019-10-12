@@ -35,3 +35,7 @@
 - 한국 AI open data
 
   [http://www.aihub.or.kr/content/610]
+
+- 데이터 사이언스 인터뷰 질문 모음
+
+  [https://zzsza.github.io/data/2018/02/17/datascience-interivew-questions/]
