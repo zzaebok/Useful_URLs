@@ -39,3 +39,7 @@
 - 데이터 사이언스 인터뷰 질문 모음
 
   [https://zzsza.github.io/data/2018/02/17/datascience-interivew-questions/]
+  
+- Visualization via PCA and t-SNE with dataframe
+
+  [https://towardsdatascience.com/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b]
