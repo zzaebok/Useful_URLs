@@ -51,3 +51,7 @@
 - AUROC score on machine learning
 
   [https://towardsdatascience.com/understanding-the-roc-and-auc-curves-a05b68550b69]
+  
+- VAE A to Z
+
+  [https://dnddnjs.github.io/paper/2018/06/19/vae/]
