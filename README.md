@@ -47,3 +47,7 @@
 - Ensemble explanation
 
   [https://subinium.github.io/introduction-to-ensemble-1/]
+  
+- AUROC score on machine learning
+
+  [https://towardsdatascience.com/understanding-the-roc-and-auc-curves-a05b68550b69]
