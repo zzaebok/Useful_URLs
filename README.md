@@ -55,3 +55,7 @@
 - VAE A to Z
 
   [https://dnddnjs.github.io/paper/2018/06/19/vae/]
+  
+- Cross entropy as deep learning loss function. from entropy to KL divergence
+
+  [https://www.youtube.com/watch?v=Dc0PQlNQhGY]
