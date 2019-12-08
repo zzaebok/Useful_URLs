@@ -59,3 +59,7 @@
 - Cross entropy as deep learning loss function. from entropy to KL divergence
 
   [https://www.youtube.com/watch?v=Dc0PQlNQhGY]
+
+- from Transformer to BERT (video)
+
+  [https://www.youtube.com/watch?v=xhY7m8QVKjo&t=2551s]
