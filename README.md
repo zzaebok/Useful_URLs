@@ -63,3 +63,7 @@
 - from Transformer to BERT (video)
 
   [https://www.youtube.com/watch?v=xhY7m8QVKjo&t=2551s]
+  
+- Dimensionality reduction (mainly random projection)
+
+  [https://machinelearningmedium.com/2017/07/28/random-projection-in-dimensionality-reduction/]
