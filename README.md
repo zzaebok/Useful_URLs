@@ -67,3 +67,7 @@
 - Dimensionality reduction (mainly random projection)
 
   [https://machinelearningmedium.com/2017/07/28/random-projection-in-dimensionality-reduction/]
+  
+- 기초 행렬 연산 (공분산행렬 .. )
+
+  [https://ratsgo.github.io/linear%20algebra/2017/03/14/operations/]
