@@ -71,3 +71,7 @@
 - 기초 행렬 연산 (공분산행렬 .. )
 
   [https://ratsgo.github.io/linear%20algebra/2017/03/14/operations/]
+  
+- graph visualization with 
+
+  [https://towardsdatascience.com/python-interactive-network-visualization-using-networkx-plotly-and-dash-e44749161ed7]
