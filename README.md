@@ -75,3 +75,7 @@
 - graph visualization with 
 
   [https://towardsdatascience.com/python-interactive-network-visualization-using-networkx-plotly-and-dash-e44749161ed7]
+  
+- 자연어처리 (LSA 등)
+
+  [https://wikidocs.net/24949]
