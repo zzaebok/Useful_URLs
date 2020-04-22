@@ -79,3 +79,7 @@
 - 자연어처리 (LSA 등)
 
   [https://wikidocs.net/24949]
+
+- 도커
+
+  [https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html]
