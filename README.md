@@ -83,3 +83,7 @@
 - 도커
 
   [https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html]
+
+- faiss
+
+  [https://towardsdatascience.com/understanding-faiss-619bb6db2d1a]
