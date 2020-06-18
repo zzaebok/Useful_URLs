@@ -87,3 +87,7 @@
 - faiss
 
   [https://towardsdatascience.com/understanding-faiss-619bb6db2d1a]
+  
+- symlinks
+
+  [http://www.geekride.com/hard-link-vs-soft-link/]
