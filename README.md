@@ -91,3 +91,7 @@
 - symlinks
 
   [http://www.geekride.com/hard-link-vs-soft-link/]
+
+- pytorch geometirc tutorial
+
+  [https://towardsdatascience.com/hands-on-graph-neural-networks-with-pytorch-pytorch-geometric-359487e221a8]
