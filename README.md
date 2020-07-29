@@ -95,3 +95,7 @@
 - pytorch geometirc tutorial
 
   [https://towardsdatascience.com/hands-on-graph-neural-networks-with-pytorch-pytorch-geometric-359487e221a8]
+  
+- tensor dimension
+
+  [https://wikidocs.net/52846]
