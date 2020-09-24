@@ -106,4 +106,4 @@
 
 - A/B test
 
-  [https://conversionsciences.com/ab-testing-statistics/]
+  [https://byrony.github.io/understanding-ab-testing-and-statistics-behind.html]
