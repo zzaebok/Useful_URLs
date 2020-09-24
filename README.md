@@ -103,3 +103,7 @@
 - tensor dimension
 
   [https://wikidocs.net/52846]
+
+- A/B test
+
+  [https://conversionsciences.com/ab-testing-statistics/]
