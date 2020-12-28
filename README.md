@@ -107,3 +107,7 @@
 - A/B test
 
   [https://byrony.github.io/understanding-ab-testing-and-statistics-behind.html]
+
+- Android main components, but quite old one
+
+  [https://kairo96.gitbooks.io/android/content/]
