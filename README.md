@@ -111,3 +111,7 @@
 - Android main components, but quite old one
 
   [https://kairo96.gitbooks.io/android/content/]
+  
+- Android coroutines
+
+  [https://medium.com/androiddevelopers/coroutines-on-android-part-i-getting-the-background-3e0e54d20bb]
