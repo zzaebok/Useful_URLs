@@ -115,3 +115,7 @@
 - Android coroutines
 
   [https://medium.com/androiddevelopers/coroutines-on-android-part-i-getting-the-background-3e0e54d20bb]
+  
+- Expectation maximization
+
+  [https://www.youtube.com/watch?v=REypj2sy_5U]
