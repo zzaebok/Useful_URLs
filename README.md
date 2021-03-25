@@ -119,3 +119,7 @@
 - Expectation maximization
 
   [https://www.youtube.com/watch?v=REypj2sy_5U]
+  
+- Few shot learning
+
+  [https://www.youtube.com/watch?v=hE7eGew4eeg]
