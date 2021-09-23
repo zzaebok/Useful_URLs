@@ -123,3 +123,7 @@
 - Few shot learning
 
   [https://www.youtube.com/watch?v=hE7eGew4eeg]
+  
+- System design for recommender system
+
+  [https://eugeneyan.com/writing/system-design-for-discovery/?fbclid=IwAR1NOMAbVShjTcFhukvwNnVGK3YzWMFZ3E7BSCF9trO2O6Vq1Fz3af9Flyw]
