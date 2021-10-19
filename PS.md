@@ -20,6 +20,20 @@
     - 따라서, 찾는 값 (parametric search시) 이 변함에 따라 결과가 단조 증가/단조 감소하는 경우에 고려해봄직함
     - 논리적 해결이 아니라 구하고자 하는 값을 툭툭찔러서 찾아보는 parametric search임
     - 주어지는 변수의 범위가 10억과 같이 큰 수일 수 
+    - 아래 코드가 가장 일반적인 모양새
+    ```python
+    int l=0;
+    int r=1000000001;
+    while (l<r) {
+        int mid = (l+r)/2;
+        if (num >= answer) {
+            l = mid;
+        } else {
+            r = mid;
+        }
+        if (r-l == 1) break;
+    }
+    ```
 
 ### 자주하는 실수 ###
 
