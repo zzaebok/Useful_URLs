@@ -1,0 +1,226 @@
+1. k8s 기본 개념
+    - 애플리케이션 배포 관리가 가장 중요한 역할 (microservices : containerized app)
+    - 즉, 대규모 분산환경에 적합하다. 애플리케이션들을 하나하나 수동적으로 관리할 수 없으니. 관리도구로서 k8s를 사용한다.
+    - 왜 app을 container화 할까?? (Host 위에 바로 올리거나, VM 위에 올려도 되는데..)
+        - 아래 '방법론' 들을 접목하기 위한 '솔루션'임. / 위는 Monolithic 한 아키텍처에 어울리는 솔루션인거임.
+        - microservice architecture (MSA)
+        - devops
+    - 따라서, OS container 보다는 App container 가 더 관심 분야이며 앱별 container를 구성하는 것이 k8s 사용함으로써 이득을 볼 수 있는 것이다.
+    - 동일 호스트 내에 여러 app containers 를 만들게 되면, 같은 호스트라도 network, storage, pid 등등이 격리가 된다 (리눅스 커널의 namespace를 통해)
+        - 근데 만일 동일한 network 를 공유해야 한다면? 두 개의 앱을 하나의 컨테이너에 넣을 수도 있겠지만 이는 MSA에 위반되는 방법이므로, 컨테이너 간 네임스페이스를 공유하도록 해야함.
+    - pod
+        - pod 라는 최소 리소스로 container 관리 (k8s는 container를 배포하는 것이 아니라 pod를 배포하는 것)
+        - pod는 1개 이상의 container를 넣을 수 있다.
+            - 왜 1개 pod에 2개의 container를 넣어서 쓸 수 있는걸까? MSA랑 안맞는거 아닐까?
+            - 같은 pod에 들어오는 순간 namespace가 공유되기 때문이다. 즉, 하나의 container인 것 처럼 행동한다.
+            - pod로 들어오면, 다른 pod와는 namespace가 공유되지 않는다. 즉, 공유하려면 같은 pod에 넣어줘야한다.
+        - 즉, best practice는 app -> containerized app -> pod
+    - 컨테이너 오케스트레이션
+        - 컨테이너를 중앙에서 관리 / 자동화
+        - 분산 컴퓨팅 환경을 가정함. 수백 개의 호스트에 수천 개의 컨테이너
+        - 네트워크, 로드밸런싱, 등등의 고려 사항들이 있음.
+    - k8s 아키텍처(내부)
+        - node는 host 느낌 (aws에서는 ec2)
+        - node들의 그룹은 cluster
+        - Control Plane (master cluster), Data Plane (slave cluster)
+            - Client가 nginx 2개를 배포해달라고 요청한다고 해보자. (Desired Status, Desired Number)
+            - API 요청을 받는 것은 API-server에서 하는 일
+            - 그럼 kube scheduler가 각 Data Plane 내의 노드들을(worker nodes) 살펴보고 최적의 후보 노드를 찾아준다.
+            - 해당 노드에서는 kubelet을 이용하여 API-server로부터 요청을 받는다. (kubelet은 API-server와 node 통신할 수 있으며 container의 헬스체크를 하는 역할)
+            - kubelet은 docker에게 이미지를 찾아서 (Registry 내의 nginx Repository) 컨테이너를 실행하도록 요청한다. (current number)
+            - Control plane의 Controller는 Desired Number와 Current Number가 같은지 체크 (다르면 Drift가 났다고한다)
+            - 이 경우 Controller가 이를 API-server에 보내면, 얘가 다시 스케쥴러를 통해 Auto Healing을 한다. (복구)
+            - API-server에는 key-value store인 etcd를 통해 관리 메타데이터들을 보유하고 있다. 이는 yaml파일의 내용 등. pod 이름,버전 등등등등 (DB위치 등~, 왜냐하면 API-server 는 데이터가 없고 다른데다가 또 물어보고 해야하니까)
+            - 이 때
+                - Control Plane (Master cluster)
+                    - API-server: 모든 노드는 API-server를 통해서 뭔가 할 수 있기 때문에 여기 접속주소가 "endpoint". API-server 접속을 못하면 아무것도 못해.
+                        - 외부 endpoint, 내부 endpoint가 있음
+                    - Scheduler
+                    - Controller
+                    - etcd
+                    - 들이 Control Plane Node 내에 container들로 떠있는거임.
+                - Data Plane
+                    - 실제 container 들이 실행되는 cluster
+                    - 각 노드에는 kube-proxy가 있는데, 각 container의 네트워킹을 핸들링하는 역할을 수행한다.
+        - 여기까지가 k8s 핵심이고 그럼 AWS EKS는 뭐가 다르냐
+            - Control Plane을 AWS가 대신 관리해줌 (장애, 확장, 이중화, 병렬 처리 등을 신경쓰지 않아도 됨) -> 그래서 관리형 서비스라고 말하는 것
+                - 예컨대 API-server나 etcd 등은 장애를 위해 이중화를 해야하는데, 지역 장애를 고려하면 multi-AZ (가용영역)으로 관리해야하고 이런 것들이 복잡하니까 대신 해주면 이득
+            - 하지만 반대로 우리가 handling 할 수 없다는 단점은 있음
+            - Fargate 는 Data Plane까지도 AWS에게 맡기는 것
+    - k8s 오브젝트(객체, 리소스) -> 'kind' 에 들어갈 수 있는
+        - pod
+            - 가장 기본은 pod를 container 혹은 app으로 보면 된다 그냥. 아래의 형태들로 배포할 수 있음 (managed pod == desired 형태가 있는, 걍 pod 만들고 배포하면 bare pod 라고함)
+            - Deployment: replica set을 배포한다.
+            - Replica Set: desired number, current number 등 관리
+            - Demon Set: 노드별로 들어가야하는 요소 관리 (노드 추가시 자동으로 넣어줘야하는)
+            - Job: pod를 job으로 구성하면 비동기 병렬처리가 가능하다 (scale out)
+            - Cronjob: cronjob으로 배포하면 언제 시작될지까지 가능
+            - Stateful Set: 기본은 stateless (상태 정보가 유지되지 않는다) 따라서 DB쪽, 백엔드쪽 (stateful) 이랑은 사실 잘 안맞는데, 이걸 container를 stateful하게 배포할 수 있음.
+        - Service: Pod에 붙는 Load Balancer 같은 네트워크 관련, pod의 논리적 컬렉션으로, 액세스 수단
+        - Scale up/out
+            - VPA (vertical pod autoscaler): scale up/down
+            - HPA (horizontal pod autoscaler): scale in/out
+            - CA (cluster autoscaler): pod가 아닌 node를 scale up/out.. 할 것인지에 대한
+        - ConfigMap(암호화 x) / Secret(암호화): 환경 변수 등~ key-value 로 저장해놓는
+        - PDB (관리자도 못죽이게하는)
+    - 선언형(declarative) 방식의 pod 구성
+        - 명령어 방식으로도 pod를 만들 수 있지만, 최근에는 선언형 방식으로 만드는 걸 추천한다.
+        - Pod spec을 선언해서 (yaml 파일)
+    - Volume: pod 에서 마운트시킨 storage 영역
+        - 이를 위한 객체는 PV(persistant volume - 실제 볼륨, 요청받은대로 만듦), PVC(claim - pod생성과 함께 volume 만들어라 요청), SC(storage class, 동적 프로비저닝) 등이 있다..
+        - 각 벤더의 스토리지 기능을 사용할 수 있도록 CSI driver라는걸 제공한다.
+    - Namespace
+        - 도커에서의 namespace 랑은 다르고, 논리적인 cluster 개념임
+        - 여러 부서에서 k8s 쓰고싶다고 했을 때 부서마다 물리적 cluster 만들어서 줄 수 없으니까 논리적으로 쪼개는 개념임.
+        - 따로 지정하지 않으면 default를 사용
+    - pod scheduling (어디 노드에 배포할지)
+        - 리소스 요구사항이 중요함 (cpu, memory)
+        - request: 스케쥴러가 보고 노드가 가용할지 판단하는 부분
+        - limits: pod의 최대 사용량. container 안에서 보이는 가용한 거랑은 다름. 따라서 실제로는 limit 넘어서 리소스를 써버릴 수도 있는데, 이렇게 limit을 넘어가버리면 프로세스를 죽여버림.
+        - 만일 1G 노드에 2개 pod가 request 300 / limit 500 으로 들어오고 실제로 400씩 쓴다고 해보자. 이 때 세 번째 pod가 들어오려고할 때 200밖에 안남는데 스케쥴러는 
+            - 압축 리소스 (CPU, I/O)에 대해서는 time slicing을 해서 병목이 생기고
+            - 압축 불가 리소스 (memory)에 대해서는 limit을 넘지 않아도 노드 resource가 부족해지면 특정 컨테이너를 kill 해버린다.
+                - 이 때 pod 설정이
+                1. best-effort (resource 구성 x) -> 제일 먼저 죽음
+                2. burstable (resource 구성) -> 다음 순위
+                3. guaranteed (request==limit) -> 다음 순위
+            - 따라서 병렬로 프로세스를 띄워서 한 두개 죽어도 되게 만들거나, request를 늘리는 방법을 써야한다.
+        - 특정 pod를 특정 node에 배포할 수 있는가 (예컨대 CPU job이 중요하면 CPU가 좋은 노드에)
+            - selector: 참조자의 라벨 (selector type = gpu)
+            - label: 피참조자의 라벨 (label type = gpu)
+            - 즉 참조자 생성 시 selector 에 피참조자의 label 값을 넣어주면 됨 (여기선 pod 만들 때 node의 label을 넣어주면 되는 거지)
+            - 반대로 node에다가 taint 를 설정해서 아무나 못오게 한 뒤, pod에 toleration을 넣어줘서 특정 pod만 node에 넣어줄 수 있음.
+                - 기본적으로 control plane에는 taint  설정이 되어 있어서 우리가 pod를 배포할 때는 data plane에 배포가 되는거임
+            - 근데 selector / label은 정적이고 유연성이 없어서 Affinity라는 것이 최근 트랜드
+                - 어떤 형태의 인스턴스만 들어올 수 있다~ / required, preferred 같은 옵션도 있고 ㅎㅎ
+    - kubectl (k8s api server와 통신하기 위한 CLI)
+        - kubectl get pods/namespace/svc
+        - deployment: kubectl apply -f f.yaml 등등~ 
+2. EKS 기본 개념
+    - EKS도 결국 k8s지만 아래와 같은 부분에서 "관리형" k8s를 제공한다고 생각하면 된다.
+        - 인증 (IAM)
+        - 네트워크 (VPC)
+        - API (AWS API + k8s API)
+            - eksctl 이란 것이 있습니다.
+        - 관리형 노드그룹 (노드 그룹은 EKS에서의 용어정의)
+            - 결국 Cluster를 구성하는 것 (autoscaling을 고려하여 min, max node 수)
+            - 하나의 클러스터 (예컨대 Control Plane) 에 여러 개의 노드그룹을 만들 수 있다.
+        - fargate
+3. EKS 클러스터 구축
+    - IAM role 형성 / VPC 생성 / 클러스터와 노드그룹 생성 / API endpoint 구성 / kubeconfig 등등을 구축하는 작업이 필요하다.
+    - kubectl 명령어 치면 알아서 API-server 로 가는데, 이런 클러스터 이름, 주소, 인증 등의 내용이 들어있는 파일이 kubeconfig 파일이다.
+    - eksctl 을 쓰면 좀 편하게 해준대
+    - POD 개수와 상관 없이 외부 사용자 연결을 위해서는 로드밸런서가 필요하고 이에 따라 서비스도 구성해줘야함.
+4. EKS 클러스터에 애플리케이션 배포
+    - ECR (Container Registry): 사실 앱 배포라고 한다면, 이 앱을 이미지로 만들고 저장할 곳이 필요한거지.
+    - Helm 을 이용한 POD 관리
+        - App을 배포할 때 pod하나만 띄우면 되는게 아니다, PV, PVC, service, ConfigMap, Secret, Role 등등 고려해야할 게 엄청 많다.
+        - 따라서 손쉬운 "앱배포 툴"에 필요성이 생겼고, 대표적인 것이 Helm 이다. (k8s 네이티브가 아님)
+        - 즉, k8s에서 손쉽게 앱을 배포하기 위한 툴 (Helm을 안쓰고는 못배긴다)
+        - 중요한 용어
+            - 차트: 앱 실행에 필요한 파일들의 묶음
+                - 차트를 만들면 여러 개의 파일들이 자동으로 만들어짐
+                - 예컨대 `Chart.yaml`, `values.yaml`, `templates/deployment.yaml` 등등 필요한 애들 
+                - `templates` 밑의 파일들이 실제 배포에 필요한 애들이고, 여기서 사용되는 동적 변수들을 모아놓은 것이 `values.yaml`
+            - 릴리즈: 차트를 실행해 앱을 실행한 인스턴스
+                - 단순 pod가 아니지. 여러 가지 리소스가 묶인 '릴리즈'
+            - 레포지토리: 파일들이 있는 네트워크 중앙의 레포지토리
+                - github 처럼, 내가 만든 chart를 psuh해놓고 할 수 있음
+    - GitOps 를 활용한 CI/CD 파이프라인
+        - CI 지속적 통합. 우리로 치면 github에 코드가 통합되는 것 / 또는 Chart를 수정해 레포지토리에 푸시하는 경우
+        - CD 지속적 배포. 쿠버네티스를 사용하면 편한거지
+        - k8s 환경에서만 가능함
+        - git을 통해 CI/CD 파이프라인을 가져가자는 방법론
+        - github (desired) 와 k8s prod (current) 사이에 agent를 하나 세워놔서 sync 하는 역할을 하게 함
+            - drift가 발생하면, agent가 helm을 이용해서 조작한다.
+            - agent 역할을 하는 애들의 예는 Weave Flux
+        - 코드, k8s 구성의 변화를 중간에서 떠서 잘 캐치해서 배포를 자동화하겠다. 로 보면 된다.
+    - 즉 EKS에서의 앱 배포 과정은
+        1. 이미지 레포 설정 (code pipeline에 등록하면, 코드 변경마다 새로 도커이미지 올리는 걸 자동화)
+        2. 애플리케이션 배포
+        3. CI/CD 파이프라인
+5. EKS 관측 기능 구성
+    - 아래 데이터들로부터 통찰력 있는 분석을 뽑아낼 수 있어야 한다.
+        - metric(성능 지표), log, tracing (API 요청과 응답에 대한)
+        - metric
+            - prometheus: 오픈소스 분석 도구도 있고, 로그 표준도 있음
+            - control plane에 대한 성능 지표는 프로메테우스 폼으로 클라우드 와치에서 이미 수집되고 있음 (aws)
+        - 실제 중요한 지표들
+            - 리소스에 대한: 사용률 (utlization), 포화도 (saturation), 오류 (errors)
+            - 서비스에 대한: 속도 (rate), 오류 (errors), 기간 (duration)
+            - 컨트롤 플레인 내의 API 서버 지연시간, 메모리 사용량 등등
+    - 각 노드에 agent가 설치되고 중앙 저장소로 log들을 떨궈줘야겠죠.
+        - 이 agent도 결국 pod로 떠야할 것이고, 노드마다 하나씩 들어가야하니까 demonset 객체로서 존재하겠구나~
+        - Fluent Bit을 demonset으로 워커 노드에 배포하고, 각 데이터를 수집해서 Kinesis firehose로 라우팅 가능.
+        - 그럼 firehose는 로그 데이터를 S3 버킷으로 스트리밍하여 Athena 스키마에 테이블을 만들고 쿼링할 수 있도록 만들 수 있음.
+    - 클라우드 와치, 쿠버네티스 지표 서버 등을 이용한 수집
+    - MSA 자체가 로깅 디버깅이 쉽지 않아서 잘 해야함
+6. EKS 에서 효율성, 복원력, 비용 최적화의 균형
+    - 효율성
+        - 큰 노드를 만들고 pod 때려박으면 비용도 아끼고 좋겠지만, 노드 장애에 취약함
+        - 따라서, 실제 서비스에서 클러스터는 작을 수록 좋다 (하지만 비용이 커진다)
+    - 복원력
+        - Pod Distruption Budget (PDB): minAvailable 을 설정할 수 있음 / 관리자가 `kubectl drain` 으로 노드 비우려고하는 등의 상황에서도 막아줄 수 있음
+        - 오버프로비저닝 (PriorityClass): 배포할 노드가 부족하면 Priority value가 낮은애를 쫓아내고 바로 배포시킴 (걔가 새로운 노드 뜰 때까지 대신 pending 하도록) / 즉, priority value가 낮은 역할 없는 pod를 만들어서 알박기를 해두는거임. POD는 프로비저닝이 초단위라 상관이 없지만 노드 만드는 건 시간이 오래걸리기 때문에 하는 것.
+    - 비용 최적화
+        - 대부분 EC2가 가장 큰 비용을 차지함
+        - 온디맨드 인스턴스보다는 예약 인스턴스, 스팟 인스턴스(죽을수도) 등을 사용하는 것을 시나리오에 따라 고려
+        - 당연히 보장되어야 하는 것은 온디맨드에 올려야하지만, 일부 시간만 사용되거나, 잠깐 죽어도 상관 없으면 스팟 사용
+7. EKS 에서의 네트워킹 관리
+    - Native k8s
+    - EKS 에서의 네트워크
+        - 하나의 파드에 들어가면 그 안의 container들은 IP를 공유한다.
+        - 통신유형
+            - Container to Container (동일한 파드 내)
+                - 파드에 포함되어있지 않으면 (각각 container 2개 떠있으면) 동일 노드에 있어도 IP통신 (개별 라우팅 테이블을 가지고)
+                - 파드에 포함되어 있으면 IPC통신 (메모리에서~)
+                    - 따라서 동일한 IP기 때문에 동일한 포트를 사용할 수는 없음. 포트충돌.
+            - Pod to Pod
+                - 사실 제일 관심있는 부분
+                - pod별로 IP가 붙는다 (10.10.10.11 이런식으로 private address / 노드는 (192.168.10.11))
+                - 동일 노드에서는 라우팅 이슈가 없지만, 다른 노드와는 이슈가 있음. 왜냐하면 사설 address를 쓰기 때문에 서로 식별이 안됨.
+                - 따라서 이를 가능하게 하기 위해서는
+                    - 네이티브 k8s에서는 plug-in으로 알아서 해라 (예컨대 VXLAN)
+                    - AWS는 CNI라는 플러그인을 내부적으로 사용함 (private address 없어지고, 그냥 외부 IP를 붙여줘버림)
+                        - 얘는 pod 만들때 노드에서 보조 IP들을 하나씩 만들어서 붙여주는거임
+                        - 따라서 192.168.10.0/24 처럼 사이드범위를 적게만들면, 네트워크문제 때문에 pod가 더 뜰 수 없음
+                - 하지만, pod의 IP로 통신하는 것은 바람직하지 못함. 언제든지 IP가 바뀔 수 있음 (영속성 x)
+                - 따라서, 각 역할의 pod집합에 Cluster IP (고정IP) 를 만들고, 각 POD에 포워딩을 해줌
+                    - 요청은 Cluster IP가 받아서 살아있는 POD에 보내주는거지
+                    - 하지만 Cluster IP는 네트워크 내부에서만 연결이되고 외부에서는 안됨
+                    - 즉, Service를 띄우고 80으로 요청 받고 target ports로 forwarding 해주는데, selector로 어떤 pod집합에 해줄지 정하는거지
+                    - 외부에서는 node port만 볼 수 있는데, 이건 처리 불가능하니까 외부에 LB를 열어서 해당 노드로 포워딩해주면됨
+            - Cluster to Ingress (외부로부터)
+                - Ingress는 서비스가 아님 (서비스 LB가 아님)
+                - Ingress와 Ingress Controller (ELB, ALB..) 로 이루어짐
+                - 서비스 LB는 L4 layer 따라서 path나 host 이름으로 접근이 안되고 다 따로 노드 포트로 드가고 힘든데, Ingress를 쓰면 L7 이기 때문에 ss.com/dev 와 같은 path 방식으로도 접근 가능 / 여러 타겟을 하나의 LB로 처리 가능
+                - 따라서 앱 5개면 LB 5개 둬야하는데, ingress로 두면 하나로 하고 5개로 뿌려주는것도 된다.
+                - path 별로 타겟을 다르게 해주는거임
+    - Service Mesh
+        - 개발자는 app logic만 짜고, 통신과 관련된 (layer4, layer7 네트워크의 스케일 아웃 등~) 애들은 중앙 controller에 연결해서 처리하도록.
+        - 그러면 컨트롤러가 네트워크 토폴로지를 파악해서 알아서 할 수 있도록.
+        - 각 서비스별로 envoy proxy pod가 떠야함. 중앙 컨트롤러는 AWS에서는 AWS App Mesh
+8. EKS 인증 및 권한 부여 관리
+    - 인증 (authentication): 누구세요?
+    - 권한 부여 (authorization): 들여보내도 되나요? / 어쨋든 인증은 되어야 권한 부여 가능
+        - k8s 는 인증은 없고 권한부여 기능만 있음 (RBAC - role based access control)
+        - 따라서 인증은 니들이 알아서해라 이고 AWS에서는 IAM
+    - RBAC 구성요소
+        - 주체 (사용자, 그룹, ...)
+        - 리소스 (pod, node, ...)
+        - 운영 (가져오기, 생성, ...)
+        - 리소스와 운영을 합쳐서 Role 이라고 함 (어떤 리소스에 어떤 작업을 할 수 있는지). 이는 AWS 롤과는 다른 쿠버네티스의 롤임
+    - RBAC 의 User, Group 에다가 Role을 부여하고 (role binding), 이 User, Group을 AWS의 IAM과 연결
+        - 직접하는게 안된대. 그래서 RBAC의 User, Group은 중간자 역할을 하는거
+    - 근데 만일 어떤 app pod가 뭔가 다른 pod 같은 다른 리소스를 생성하거나 뭔갈 할 수 있으니까 얘도 롤을 부여해줘야하는데
+        - 따라서 pod에 service account (sa) 라는걸 등록해서 롤을 부여할 수 있음
+    - 절차
+        - role 만들기
+        - group과 role binding
+        - aws-auth configmap 편집 (어떤 그룹이 어떤 롤을 갖는지 매핑 / IAM의 인증주체와)
+9. 보안 Workflow 구현
+    - 엔드포인트 엑세스 제어 (private으로 걸고 특정 범위로 제한할 수 있음)
+10. k8s 버전 업그레이드 관리 
+    - 메이저.마이너.패치
+    - 메이저: 전체 수정, 마이너: 새로운 기능, 패치: 버그 수정
+    - 롤링업데이트
