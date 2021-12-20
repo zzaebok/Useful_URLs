@@ -131,3 +131,7 @@
 - k8s service
 
   [https://bcho.tistory.com/1262]
+  
+- dataflow windows
+
+  [https://colab.research.google.com/github/apache/beam/blob/master/examples/notebooks/tour-of-beam/windowing.ipynb#scrollTo=DpFxVHD9CZ-7]
