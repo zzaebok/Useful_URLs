@@ -135,3 +135,7 @@
 - dataflow windows
 
   [https://colab.research.google.com/github/apache/beam/blob/master/examples/notebooks/tour-of-beam/windowing.ipynb#scrollTo=DpFxVHD9CZ-7]
+  
+- 비동기 (dart)
+
+  [https://www.youtube.com/watch?v=rk41rBXq3zQ]
