@@ -139,3 +139,9 @@
 - 비동기 (dart)
 
   [https://www.youtube.com/watch?v=rk41rBXq3zQ]
+  
+- OSI 7계층
+  
+  [https://www.youtube.com/watch?v=1pfTxp25MA8]
+  
+  
