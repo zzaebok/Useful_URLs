@@ -144,4 +144,6 @@
   
   [https://www.youtube.com/watch?v=1pfTxp25MA8]
   
-  
+- 블록체인 (easy)
+
+  [https://brunch.co.kr/@bumgeunsong/50]
