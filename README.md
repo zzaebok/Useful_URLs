@@ -147,3 +147,7 @@
 - 블록체인 (easy)
 
   [https://brunch.co.kr/@bumgeunsong/50]
+  
+- OCR
+
+  [https://tv.naver.com/v/4578167]
