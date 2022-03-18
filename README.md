@@ -1,153 +1,77 @@
-# Helpful urls on machine learning / deep learning
+- [Attention? Attention!](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
 
-- Attention? Attention!
+- [Pytorch tutorials](https://pytorch.org/tutorials/)
 
-  [https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html]
+- [Various optimizers](http://shuuki4.github.io/deep%20learning/2016/05/20/Gradient-Descent-Algorithm-Overview.html)
 
-- Pytorch tutorials
+- [Word2vec (ratsgo 님 블로그)](https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/30/word2vec/)
 
-  [https://pytorch.org/tutorials/]
+- [SVD (다크프로그래머 님 블로그)](https://darkpgmr.tistory.com/106)
 
-- Various optimizers
+- [From seq2seq to BERT](https://lovit.github.io/machine%20learning/2019/03/17/attention_in_nlp/)
 
-  [http://shuuki4.github.io/deep%20learning/2016/05/20/Gradient-Descent-Algorithm-Overview.html]
+- [Data imbalance problem](https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)
 
-- Word2vec (ratsgo 님 블로그)
+- [Transformer Network](https://wikidocs.net/31379)
 
-  [https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/30/word2vec/]
+- [한국 AI open data](http://www.aihub.or.kr/content/610)
 
-- SVD (다크프로그래머 님 블로그)
-
-  [https://darkpgmr.tistory.com/106]
-
-- From seq2seq to BERT
-
-  [https://lovit.github.io/machine%20learning/2019/03/17/attention_in_nlp/]
-
-- Data imbalance problem
-
-  [https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/]
-
-- Transformer Network
-
-  [https://wikidocs.net/31379]
-
-- 한국 AI open data
-
-  [http://www.aihub.or.kr/content/610]
-
-- 데이터 사이언스 인터뷰 질문 모음
-
-  [https://zzsza.github.io/data/2018/02/17/datascience-interivew-questions/]
+- [데이터 사이언스 인터뷰 질문 모음](https://zzsza.github.io/data/2018/02/17/datascience-interivew-questions/)
   
-- Visualization via PCA and t-SNE with dataframe
+- [Visualization via PCA and t-SNE with dataframe](https://towardsdatascience.com/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)
 
-  [https://towardsdatascience.com/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b]
-
-- Ensemble explanation
-
-  [https://subinium.github.io/introduction-to-ensemble-1/]
+- [Ensemble explanation](https://subinium.github.io/introduction-to-ensemble-1/)
   
-- AUROC score on machine learning
-
-  [https://towardsdatascience.com/understanding-the-roc-and-auc-curves-a05b68550b69]
+- [AUROC score on machine learning](https://towardsdatascience.com/understanding-the-roc-and-auc-curves-a05b68550b69)
   
-- recommendation metrics
-
-  [https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832]
+- [recommendation metrics](https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832)
   
-- VAE A to Z
-
-  [https://dnddnjs.github.io/paper/2018/06/19/vae/]
+- [VAE A to Z](https://dnddnjs.github.io/paper/2018/06/19/vae/)
   
-- Cross entropy as deep learning loss function. from entropy to KL divergence
+- [Cross entropy as deep learning loss function. from entropy to KL divergence](https://www.youtube.com/watch?v=Dc0PQlNQhGY)
 
-  [https://www.youtube.com/watch?v=Dc0PQlNQhGY]
-
-- from Transformer to BERT (video)
-
-  [https://www.youtube.com/watch?v=xhY7m8QVKjo&t=2551s]
+- [from Transformer to BERT (video)](https://www.youtube.com/watch?v=xhY7m8QVKjo&t=2551s)
   
-- Dimensionality reduction (mainly random projection)
-
-  [https://machinelearningmedium.com/2017/07/28/random-projection-in-dimensionality-reduction/]
+- [Dimensionality reduction (mainly random projection)](https://machinelearningmedium.com/2017/07/28/random-projection-in-dimensionality-reduction/)
   
-- 기초 행렬 연산 (공분산행렬 .. )
-
-  [https://ratsgo.github.io/linear%20algebra/2017/03/14/operations/]
+- [기초 행렬 연산 (공분산행렬 .. )](https://ratsgo.github.io/linear%20algebra/2017/03/14/operations/)
   
-- graph visualization with 
-
-  [https://towardsdatascience.com/python-interactive-network-visualization-using-networkx-plotly-and-dash-e44749161ed7]
+- [graph visualization with ](https://towardsdatascience.com/python-interactive-network-visualization-using-networkx-plotly-and-dash-e44749161ed7)
   
-- 자연어처리 (LSA 등)
+- [자연어처리 (LSA 등)](https://wikidocs.net/24949)
 
-  [https://wikidocs.net/24949]
+- [도커](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)
 
-- 도커
-
-  [https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html]
-
-- faiss
-
-  [https://towardsdatascience.com/understanding-faiss-619bb6db2d1a]
+- [faiss](https://towardsdatascience.com/understanding-faiss-619bb6db2d1a)
   
-- symlinks
+- [symlinks](http://www.geekride.com/hard-link-vs-soft-link/)
 
-  [http://www.geekride.com/hard-link-vs-soft-link/]
-
-- pytorch geometirc tutorial
-
-  [https://towardsdatascience.com/hands-on-graph-neural-networks-with-pytorch-pytorch-geometric-359487e221a8]
+- [pytorch geometirc tutorial](https://towardsdatascience.com/hands-on-graph-neural-networks-with-pytorch-pytorch-geometric-359487e221a8)
   
-- tensor dimension
+- [tensor dimension](https://wikidocs.net/52846)
 
-  [https://wikidocs.net/52846]
+- [A/B test](https://byrony.github.io/understanding-ab-testing-and-statistics-behind.html)
 
-- A/B test
-
-  [https://byrony.github.io/understanding-ab-testing-and-statistics-behind.html]
-
-- Android main components, but quite old one
-
-  [https://kairo96.gitbooks.io/android/content/]
+- [Android main components, but quite old one](https://kairo96.gitbooks.io/android/content/)
   
-- Android coroutines
-
-  [https://medium.com/androiddevelopers/coroutines-on-android-part-i-getting-the-background-3e0e54d20bb]
+- [Android coroutines](https://medium.com/androiddevelopers/coroutines-on-android-part-i-getting-the-background-3e0e54d20bb)
   
-- Expectation maximization
-
-  [https://www.youtube.com/watch?v=REypj2sy_5U]
+- [Expectation maximization](https://www.youtube.com/watch?v=REypj2sy_5U)
   
-- Few shot learning
-
-  [https://www.youtube.com/watch?v=hE7eGew4eeg]
+- [Few shot learning](https://www.youtube.com/watch?v=hE7eGew4eeg)
   
-- System design for recommender system
-
-  [https://eugeneyan.com/writing/system-design-for-discovery/?fbclid=IwAR1NOMAbVShjTcFhukvwNnVGK3YzWMFZ3E7BSCF9trO2O6Vq1Fz3af9Flyw]
+- [System design for recommender system](https://eugeneyan.com/writing/system-design-for-discovery/?fbclid=IwAR1NOMAbVShjTcFhukvwNnVGK3YzWMFZ3E7BSCF9trO2O6Vq1Fz3af9Flyw)
   
-- k8s service
-
-  [https://bcho.tistory.com/1262]
+- [k8s service](https://bcho.tistory.com/1262)
   
-- dataflow windows
-
-  [https://colab.research.google.com/github/apache/beam/blob/master/examples/notebooks/tour-of-beam/windowing.ipynb#scrollTo=DpFxVHD9CZ-7]
+- [dataflow windows](https://colab.research.google.com/github/apache/beam/blob/master/examples/notebooks/tour-of-beam/windowing.ipynb#scrollTo=DpFxVHD9CZ-7)
   
-- 비동기 (dart)
-
-  [https://www.youtube.com/watch?v=rk41rBXq3zQ]
+- [비동기 (dart)](https://www.youtube.com/watch?v=rk41rBXq3zQ)
   
-- OSI 7계층
+- [OSI 7계층](https://www.youtube.com/watch?v=1pfTxp25MA8)
   
-  [https://www.youtube.com/watch?v=1pfTxp25MA8]
+- [블록체인 (easy)](https://brunch.co.kr/@bumgeunsong/50)
   
-- 블록체인 (easy)
-
-  [https://brunch.co.kr/@bumgeunsong/50]
+- [OCR](https://tv.naver.com/v/4578167)
   
-- OCR
-
-  [https://tv.naver.com/v/4578167]
+- [비동기 햄버거](https://fastapi.tiangolo.com/async/#in-a-hurry)
