@@ -77,5 +77,3 @@
 - [비동기 햄버거](https://fastapi.tiangolo.com/async/#in-a-hurry)
 
 - [프로메테우스](https://medium.com/kubernetes-tutorials/monitoring-your-kubernetes-deployments-with-prometheus-5665eda54045)
-
-- [Starlette monitoring](https://github.com/perdy/starlette-prometheus)
