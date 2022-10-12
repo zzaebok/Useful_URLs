@@ -85,3 +85,5 @@
 - [mongoDB](https://velopert.com/category/dev-log/tech-log/mongodb)
 
 - [flutter plugin](https://codelabs.developers.google.com/codelabs/write-flutter-plugin?hl=ko#0)
+
+- [앙상블](https://towardsdatascience.com/ensemble-methods-bagging-boosting-and-stacking-c9214a10a205)
