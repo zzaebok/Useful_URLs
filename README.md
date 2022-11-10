@@ -87,3 +87,5 @@
 - [flutter plugin](https://codelabs.developers.google.com/codelabs/write-flutter-plugin?hl=ko#0)
 
 - [앙상블](https://towardsdatascience.com/ensemble-methods-bagging-boosting-and-stacking-c9214a10a205)
+
+- [Flutter Bloc Architecture](https://medium.com/flutterpub/architecting-your-flutter-project-bd04e144a8f1)
