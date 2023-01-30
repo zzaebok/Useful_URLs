@@ -91,3 +91,5 @@
 - [Flutter Bloc Architecture](https://medium.com/flutterpub/architecting-your-flutter-project-bd04e144a8f1)
 
 - [Flutter nested Listviews](https://timm.preetz.name/articles/nested-listviews-in-flutter)
+
+- [Huggingface BERT 톺아보기](https://heekangpark.github.io/nlp/huggingface-bert)
