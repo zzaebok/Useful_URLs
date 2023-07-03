@@ -95,3 +95,5 @@
 - [Huggingface BERT 톺아보기](https://heekangpark.github.io/nlp/huggingface-bert)
 
 - [ml fastapi](https://towardsdatascience.com/how-to-deploy-a-machine-learning-model-with-fastapi-docker-and-github-actions-13374cbd638a)
+
+- [Beam Search Customization](https://towardsdatascience.com/the-power-of-constrained-language-models-cf63b65a035d)
