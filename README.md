@@ -99,3 +99,5 @@
 - [Beam Search Customization](https://towardsdatascience.com/the-power-of-constrained-language-models-cf63b65a035d)
 
 - [Multi-node GPU training pytorch](https://lambdalabs.com/blog/multi-node-pytorch-distributed-training-guide)
+
+- [Unicode normalization](https://velog.io/@leejh3224/%EB%B2%88%EC%97%AD-%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C-%EC%8A%A4%ED%8A%B8%EB%A7%81%EC%9D%84-%EB%85%B8%EB%A9%80%EB%9D%BC%EC%9D%B4%EC%A7%95-%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0)
